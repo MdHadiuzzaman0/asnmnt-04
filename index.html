@@ -342,7 +342,72 @@ Full-time
             
 
             }
+            else if(event.target.classList.contains('rejectedBtn')){
+                
+            const parentNode=event.target.parentNode;
+            const jobName=parentNode.querySelector('.jobName').innerText;
+            const jobNature=parentNode.querySelector('.jobNature').innerText;
+            const jobDetails=parentNode.querySelector('.jobDetails').innerText;
+            const status=parentNode.querySelector('.status').innerText;
+            const note=parentNode.querySelector('.note').innerText;
             
+            
+            const cardInfo={
+                jobName, jobNature, jobDetails, status:'Rejected', note
+            }
+            
+            //let plantExist = interviewList.find(
+            //item => item.plantName === cardInfo.plantName
+            // );
+            
+            // if (!plantExist) {
+            //     interviewList.push(cardInfo);
+            // }
+            let plantExist = false;
+            for (i=0;i<rejectedList.length;i++) {
+            if (rejectedList[i].jobName == cardInfo.jobName) {
+            plantExist = true;
+            break;
+            }
+            }
+            
+            if (plantExist === false) {
+                rejectedList.push(cardInfo);
+            }
+
+            interviewList= interviewList.filter(item => item.jobName != cardInfo.jobName);
+
+            if(currentstatus === 'interviewshowBtn'){
+                renderinterview();
+            }
+            calculateCount();
+            
+
+            }
+  else if(event.target.classList.contains('fa-trash-can')){
+
+        const cardToDelete = event.target.closest('.bg-white');
+
+        const jobName = cardToDelete.querySelector('.jobName').innerText;
+
+        
+        interviewList = interviewList.filter(item => item.jobName !== jobName);
+
+       
+        rejectedList = rejectedList.filter(item => item.jobName !== jobName);
+
+    
+        cardToDelete.remove();
+
+        calculateCount();
+    }
+            
+            })
+            
+          
+
+
+         
 
 
 
