@@ -446,7 +446,46 @@ Full-time
             }
 
             
-         
+            function renderrejected(){
+                filterSection.innerHTML=" ";
+                if(rejectedList.length === 0){
+                filterSection.innerHTML = emptyTemplate;
+                return;
+                }
+                for(const info of rejectedList){
+                    
+                    const div=document.createElement('div');
+                    div.className= "bg-white p-6 space-y-4 rounded-xl mb-4 border";
+                    div.innerHTML=`
+
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <h3 class="jobName font-semibold text-[18px] text-[#002C5C] ">${info.jobName}</h3>
+                            <p class="jobNature text-[#64748B]">${info.jobNature}</p>
+                        </div>
+                        <div>
+                            <i class="fa-solid fa-trash-can"></i>
+                        </div>
+                    </div>
+
+                    <p class="jobDetails text-[#64748B] text-[14px]">${info.jobDetails}</p>
+                    <p class="status text-[#EF4444] text-[14px] font-semibold p-2 rounded-xl border-2 border-[#EF4444] w-[80px]">${info.status}</p>
+                    <p class="note text-[#323B49] text-[14px]">${info.note}</p>
+
+                    <button
+                        class="interviewBtn text-[#10B981] text-[14px] font-semibold p-2 mr-2 rounded-xl border-2 border-[#10B981]">INTERVIEW</button>
+
+                    <button
+                        class="rejectedBtn text-[#EF4444] text-[14px] font-semibold p-2 rounded-xl border-2 border-[#EF4444]">REJECTED</button>
+
+                </div>
+                    `
+                    filterSection.appendChild(div)
+                }
+            }
+
+
+
 
 
 
