@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Tracker</title>
+    <link rel="stylesheet" href="./style.css">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        * {
+            font-family: "Geist", sans-serif;
+
+        }
+    </style>
+
+</head>
+
+<body class="max-w-[1600px] bg-[#F8FAFC]">
+    <section class="max-w-[1110px] mx-auto">
+
+        <h1 class="font-bold text-[32px] text-[#002C5C] mb-5">Job Application Tracker</h1>
+
+        <div class="flex gap-4">
+            <div class="text-left p-5 bg-white rounded-xl w-full">
+                <h5 class="text-[#323B49] text-[14px] font-medium">Total</h5>
+                <h3 id="total" class="text-[24px] font-bold text-[#b002C5C]"></h3>
+            </div>
+
+            <div class="text-left p-5 bg-white rounded-xl w-full">
+ 
+                <h5 class="text-[#323B49] text-[14px] font-medium">Interview</h5>
+                <h3 id="interviewCount" class="text-[24px] font-bold text-[#10B981]">0</h3>
+            </div>
+
+            <div class="text-left p-5 bg-white rounded-xl w-full">
+                <h5 class="text-[#323B49] text-[14px] font-medium">Rejected</h5>
+                <h3 id="rejectedCount" class="text-[24px] font-bold text-[#EF4444]">0</h3>
+            </div>
+        </div>
+
+        <hr class="my-[30px] text-[#E6E7E9]">
+
+        <div class="available flex justify-between items-center mb-6">
+            <h3 class="font-semibold text-[20px] text-[#002C5C] ">Available Jobs</h3>
+            <p id="updateJobCounter" class="text-[#64748B]">8 jobs</p>
+        </div>
+
+        <main>
+            <div id="btn3" class="3btn space-x-2 mb-4">
+
+                <button onclick="showOnly('allshowBtn')" id="allshowBtn" class="text-[12px] bg-black text-white p-2.5 w-20 rounded-xl">All</button>
+
+                <button onclick="showOnly('interviewshowBtn')" id="interviewshowBtn" class="text-[#64748B] text-[12px] bg-white rounded-xl p-2.5 w-20 ">Interview</button>
+
+                <button onclick="showOnly('rejectedshowBtn')" id="rejectedshowBtn" class="text-[#64748B] text-[12px]  bg-white rounded-xl p-2.5 w-20">Rejected</button>
+
+            </div>
+
+
+            <section id="filteredSection" class="hidden">
+
+            </section>
+
+
+            <section id="allcards">
+
+                <div class="singlecard bg-white p-6 space-y-4 rounded-xl mb-4 border">
+
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <h3 class="jobName font-semibold text-[18px] text-[#002C5C] ">Mobile First Crop</h3>
+                            <p class="jobNature text-[#64748B]">React Native Developer</p>
+                        </div>
+                        <div>
+                            <i id="delete" class="fa-solid fa-trash-can"></i>
+                        </div>
+                    </div>
+
+                    <p class="jobDetails text-[#64748B] text-[14px]">Remote • Full-time • $130,000 - $175,000</p>
+                    <p class="status bg-[#EEF4FF] p-2 w-[113px] text-[#002C5C] text-[14px] mb-2">NOT APPLIED</p>
+                    <p class="note text-[#323B49] text-[14px]">Build cross-platform mobile applications using React Native.
+                        Work on products used by millions of users worldwide.</p>
+
+                    <button
+                        class="interviewBtn text-[#10B981] text-[14px] font-semibold p-2 mr-2 rounded-xl border-2 border-[#10B981]">INTERVIEW</button>
+
+                    <button
+                        class="rejectedBtn text-[#EF4444] text-[14px] font-semibold p-2 rounded-xl border-2 border-[#EF4444]">REJECTED</button>
+
+                </div>
+
+                <div class="singlecard bg-white p-6 space-y-4 rounded-xl mb-4 border">
+
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <h3 class="jobName font-semibold text-[18px] text-[#002C5C] ">WebFlow Agency</h3>
+                            <p class="jobNature text-[#64748B]">Web Designer & Developer</p>
+                        </div>
+                        <div>
+                            <i class="fa-solid fa-trash-can"></i>
+                        </div>
+                    </div>
+
+                    <p class="jobDetails text-[#64748B] text-[14px]">Los Angeles, CA • Part-time • $80,000 - $120,000</p>
+                    <p class="status bg-[#EEF4FF] p-2 w-[113px] text-[#002C5C] text-[14px] mb-2">NOT APPLIED</p>
+                    <p class="note text-[#323B49] text-[14px]">Create stunning web experiences for high-profile clients. Must have portfolio and experience with modern web design trends.</p>
+
+                    <button
+                        class="interviewBtn text-[#10B981] text-[14px] font-semibold p-2 mr-2 rounded-xl border-2 border-[#10B981]">INTERVIEW</button>
+
+                    <button
+                        class="rejectedBtn text-[#EF4444] text-[14px] font-semibold p-2 rounded-xl border-2 border-[#EF4444]">REJECTED</button>
+                </div>
+
+                <div class="singlecard bg-white p-6 space-y-4 rounded-xl mb-4 border">
+
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <h3 class="jobName font-semibold text-[18px] text-[#002C5C] ">DataViz Solutions</h3>
+                            <p class="jobNature text-[#64748B]">Data Visualization Specialist</p>
+                        </div>
+                        <div>
+                            <i class="fa-solid fa-trash-can"></i>
+                        </div>
+                    </div>
+
+                    <p class="jobDetails text-[#64748B] text-[14px]">Boston, MA 
+•
+ Full-time
+ •
+ $125,000 - $165,000</p>
+                    <p class="status bg-[#EEF4FF] p-2 w-[113px] text-[#002C5C] text-[14px] mb-2">NOT APPLIED</p>
+                    <p class="note text-[#323B49] text-[14px]">Transform complex data into compelling visualizations. Required skills: D3.js, React, and strong analytical thinking.
+</p>
+
+                    <button
+                        class="interviewBtn text-[#10B981] text-[14px] font-semibold p-2 mr-2 rounded-xl border-2 border-[#10B981]">INTERVIEW</button>
+
+                    <button
+                        class="rejectedBtn text-[#EF4444] text-[14px] font-semibold p-2 rounded-xl border-2 border-[#EF4444]">REJECTED</button>
+                </div>
+
+                <div class="singlecard bg-white p-6 space-y-4 rounded-xl mb-4 border">
+
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <h3 class="jobName font-semibold text-[18px] text-[#002C5C] ">CloudFirst Inc</h3>
+                            <p class="jobNature text-[#64748B]">Backend Developer</p>
+                        </div>
+                        <div>
+                            <i class="fa-solid fa-trash-can"></i>
+                        </div>
+                    </div>
+
+                    <p class="jobDetails text-[#64748B] text-[14px]">Seattle, WA
+ •
+ Full-time
+ •
+ $140,000 - $190,000</p>
+                    <p class="status bg-[#EEF4FF] p-2 w-[113px] text-[#002C5C] text-[14px] mb-2">NOT APPLIED</p>
+                    <p class="note text-[#323B49] text-[14px]">Design and maintain scalable backend systems using Python and AWS. Work with modern DevOps practices and cloud infrastructure.</p>
+
+                    <button
+                        class="interviewBtn text-[#10B981] text-[14px] font-semibold p-2 mr-2 rounded-xl border-2 border-[#10B981]">INTERVIEW</button>
+
+                    <button
+                        class="rejectedBtn text-[#EF4444] text-[14px] font-semibold p-2 rounded-xl border-2 border-[#EF4444]">REJECTED</button>
+                </div>
+                
+                <div class="singlecard bg-white p-6 space-y-4 rounded-xl mb-4 border">
+
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <h3 class="jobName font-semibold text-[18px] text-[#002C5C] ">Innovation Labs</h3>
+                            <p class="jobNature text-[#64748B]">UI/UX Engineer</p>
+                        </div>
+                        <div>
+                            <i class="fa-solid fa-trash-can"></i>
+                        </div>
+                    </div>
+
+                    <p class="jobDetails text-[#64748B] text-[14px]">Austin, TX
+ •
+ Full-time
+ •
+ $110,000 - $150,000</p>
+                    <p class="status bg-[#EEF4FF] p-2 w-[113px] text-[#002C5C] text-[14px] mb-2">NOT APPLIED</p>
+                    <p class="note text-[#323B49] text-[14px]">Create beautiful and functional user interfaces for our suite of products. Strong design skills and frontend development expertise required.</p>
+
+                    <button
+                        class="interviewBtn text-[#10B981] text-[14px] font-semibold p-2 mr-2 rounded-xl border-2 border-[#10B981]">INTERVIEW</button>
+
+                    <button
+                        class="rejectedBtn text-[#EF4444] text-[14px] font-semibold p-2 rounded-xl border-2 border-[#EF4444]">REJECTED</button>
+                </div>
+
+                <div class="singlecard bg-white p-6 space-y-4 rounded-xl mb-4 border">
+
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <h3 class="jobName font-semibold text-[18px] text-[#002C5C] ">TechCorp Industries</h3>
+                            <p class="jobNature text-[#64748B]">Senior Frontend Developer</p>
+                        </div>
+                        <div>
+                            <i class="fa-solid fa-trash-can"></i>
+                        </div>
+                    </div>
+
+                    <p class="jobDetails text-[#64748B] text-[14px]">LSan Francisco, CA
+ • 
+Full-time 
+•
+ $130,000 - $175,000</p>
+                    <p class="status bg-[#EEF4FF] p-2 w-[113px] text-[#002C5C] text-[14px] mb-2">NOT APPLIED</p>
+                    <p class="note text-[#323B49] text-[14px]">We are looking for an experienced Frontend Developer to build scalable web applications using React and TypeScript. You will work with a talented team on cutting-edge projects.</p>
+
+                    <button
+                        class="interviewBtn text-[#10B981] text-[14px] font-semibold p-2 mr-2 rounded-xl border-2 border-[#10B981]">INTERVIEW</button>
+
+                    <button
+                        class="rejectedBtn text-[#EF4444] text-[14px] font-semibold p-2 rounded-xl border-2 border-[#EF4444]">REJECTED</button>
+                </div>
+
+                <div class="singlecard bg-white p-6 space-y-4 rounded-xl mb-4 border">
+
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <h3 class="jobName font-semibold text-[18px] text-[#002C5C] ">StartupXYZ</h3>
+                            <p class="jobNature text-[#64748B]">Full Stack Engineer</p>
+                        </div>
+                        <div>
+                            <i class="fa-solid fa-trash-can"></i>
+                        </div>
+                    </div>
+
+                    <p class="jobDetails text-[#64748B] text-[14px]">Remote
+ • 
+Full-time 
+•
+ $120,000 - $160,000</p>
+                    <p class="status bg-[#EEF4FF] p-2 w-[113px] text-[#002C5C] text-[14px] mb-2">NOT APPLIED</p>
+                    <p class="note text-[#323B49] text-[14px]">Join our fast-growing startup and work on our core platform. Experience with Node.js and React required. Great benefits and equity package included.</p>
+
+                    <button
+                        class="interviewBtn text-[#10B981] text-[14px] font-semibold p-2 mr-2 rounded-xl border-2 border-[#10B981]">INTERVIEW</button>
+
+                    <button
+                        class="rejectedBtn text-[#EF4444] text-[14px] font-semibold p-2 rounded-xl border-2 border-[#EF4444]">REJECTED</button>
+                </div>
+
+                <div class="singlecard bg-white p-6 space-y-4 rounded-xl mb-4 border">
+
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <h3 class="jobName font-semibold text-[18px] text-[#002C5C] ">MegaCorp Solutions</h3>
+                            <p class="jobNature text-[#64748B]">JavaScript Developer</p>
+                        </div>
+                        <div>
+                            <i class="fa-solid fa-trash-can"></i>
+                        </div>
+                    </div>
+
+                    <p class="jobDetails text-[#64748B] text-[14px]">New York, NY
+ • 
+Full-time 
+•
+ $130,000 - $170,00</p>
+                    <p class="status bg-[#EEF4FF] p-2 w-[113px] text-[#002C5C] text-[14px] mb-2">NOT APPLIED</p>
+                    <p class="note text-[#323B49] text-[14px]">Build enterprise applications with JavaScript and modern frameworks. We offer competitive compensation, health insurance, and professional development opportunities.</p>
+
+                    <button
+                        class="interviewBtn text-[#10B981] text-[14px] font-semibold p-2 mr-2 rounded-xl border-2 border-[#10B981]">INTERVIEW</button>
+
+                    <button
+                        class="rejectedBtn text-[#EF4444] text-[14px] font-semibold p-2 rounded-xl border-2 border-[#EF4444]">REJECTED</button>
+                </div>
+                
+            </section>
+        </main>
+    </section>
+
+    <script>
+        
+
+
+
+
+        let interviewList=[];
+        let rejectedList=[];
+        let currentstatus='all';
+
+        const mainContainer=document.querySelector('main');
+
+        mainContainer.addEventListener('click', function(event){
+
+            if(event.target.classList.contains('interviewBtn')){
+                
+            const parentNode=event.target.parentNode;
+            const jobName=parentNode.querySelector('.jobName').innerText;
+            const jobNature=parentNode.querySelector('.jobNature').innerText;
+            const jobDetails=parentNode.querySelector('.jobDetails').innerText;
+            const status=parentNode.querySelector('.status').innerText;
+            const note=parentNode.querySelector('.note').innerText;
+            
+            
+            const cardInfo={
+                jobName, jobNature, jobDetails, status:'Interview', note
+            }
+            
+            //let plantExist = interviewList.find(
+            //item => item.plantName === cardInfo.plantName
+            // );
+            
+            // if (!plantExist) {
+            //     interviewList.push(cardInfo);
+            // }
+            let plantExist = false;
+            for (i=0;i<interviewList.length;i++) {
+            if (interviewList[i].jobName == cardInfo.jobName) {
+            plantExist = true;
+            break;
+            }
+            }
+            
+            if (plantExist === false) {
+                interviewList.push(cardInfo);
+            }
+
+             rejectedList= rejectedList.filter(item => item.jobName != cardInfo.jobName);
+
+             if(currentstatus === 'rejectedshowBtn'){
+                renderrejected();
+            }
+            calculateCount();
+            
+
+            }
+            else if(event.target.classList.contains('rejectedBtn')){
+                
+            const parentNode=event.target.parentNode;
+            const jobName=parentNode.querySelector('.jobName').innerText;
+            const jobNature=parentNode.querySelector('.jobNature').innerText;
+            const jobDetails=parentNode.querySelector('.jobDetails').innerText;
+            const status=parentNode.querySelector('.status').innerText;
+            const note=parentNode.querySelector('.note').innerText;
+            
+            
+            const cardInfo={
+                jobName, jobNature, jobDetails, status:'Rejected', note
+            }
+            
+            //let plantExist = interviewList.find(
+            //item => item.plantName === cardInfo.plantName
+            // );
+            
+            // if (!plantExist) {
+            //     interviewList.push(cardInfo);
+            // }
+            let plantExist = false;
+            for (i=0;i<rejectedList.length;i++) {
+            if (rejectedList[i].jobName == cardInfo.jobName) {
+            plantExist = true;
+            break;
+            }
+            }
+            
+            if (plantExist === false) {
+                rejectedList.push(cardInfo);
+            }
+
+            interviewList= interviewList.filter(item => item.jobName != cardInfo.jobName);
+
+            if(currentstatus === 'interviewshowBtn'){
+                renderinterview();
+            }
+            calculateCount();
+            
+
+            }
+  else if(event.target.classList.contains('fa-trash-can')){
+
+        const cardToDelete = event.target.closest('.bg-white');
+
+        const jobName = cardToDelete.querySelector('.jobName').innerText;
+
+        
+        interviewList = interviewList.filter(item => item.jobName !== jobName);
+
+       
+        rejectedList = rejectedList.filter(item => item.jobName !== jobName);
+
+    
+        cardToDelete.remove();
+
+        calculateCount();
+    }
+            
+            })
+            
+          
+
+
+            function renderinterview(){
+                filterSection.innerHTML=" ";
+                 if(interviewList.length === 0){
+                filterSection.innerHTML = emptyTemplate;
+                return;
+                }
+                for(const info of interviewList){
+                    console.log(info)
+                    const div=document.createElement('div');
+                    div.className= "bg-white p-6 space-y-4 rounded-xl mb-4 border";
+                    div.innerHTML=`
+
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <h3 class="jobName font-semibold text-[18px] text-[#002C5C] ">${info.jobName}</h3>
+                            <p class="jobNature text-[#64748B]">${info.jobNature}</p>
+                        </div>
+                        <div>
+                            <i class="fa-solid fa-trash-can"></i>
+                        </div>
+                    </div>
+
+                    <p class="jobDetails text-[#64748B] text-[14px]">${info.jobDetails}</p>
+                    <p class="status text-[#10B981] text-[14px] font-semibold p-2 mr-2 rounded-xl border-2 border-[#10B981] w-[80px]">${info.status}</p>
+                    <p class="note text-[#323B49] text-[14px]">${info.note}</p>
+
+                    <button
+                        class="interviewBtn text-[#10B981] text-[14px] font-semibold p-2 mr-2 rounded-xl border-2 border-[#10B981]">INTERVIEW</button>
+
+                    <button
+                        class="rejectedBtn text-[#EF4444] text-[14px] font-semibold p-2 rounded-xl border-2 border-[#EF4444]">REJECTED</button>
+
+                </div>
+                    `
+                    filterSection.appendChild(div)
+                }
+            }
+
+            
+            function renderrejected(){
+                filterSection.innerHTML=" ";
+                if(rejectedList.length === 0){
+                filterSection.innerHTML = emptyTemplate;
+                return;
+                }
+                for(const info of rejectedList){
+                    
+                    const div=document.createElement('div');
+                    div.className= "bg-white p-6 space-y-4 rounded-xl mb-4 border";
+                    div.innerHTML=`
+
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <h3 class="jobName font-semibold text-[18px] text-[#002C5C] ">${info.jobName}</h3>
+                            <p class="jobNature text-[#64748B]">${info.jobNature}</p>
+                        </div>
+                        <div>
+                            <i class="fa-solid fa-trash-can"></i>
+                        </div>
+                    </div>
+
+                    <p class="jobDetails text-[#64748B] text-[14px]">${info.jobDetails}</p>
+                    <p class="status text-[#EF4444] text-[14px] font-semibold p-2 rounded-xl border-2 border-[#EF4444] w-[80px]">${info.status}</p>
+                    <p class="note text-[#323B49] text-[14px]">${info.note}</p>
+
+                    <button
+                        class="interviewBtn text-[#10B981] text-[14px] font-semibold p-2 mr-2 rounded-xl border-2 border-[#10B981]">INTERVIEW</button>
+
+                    <button
+                        class="rejectedBtn text-[#EF4444] text-[14px] font-semibold p-2 rounded-xl border-2 border-[#EF4444]">REJECTED</button>
+
+                </div>
+                    `
+                    filterSection.appendChild(div)
+                }
+            }
+
+
+
+
+
+
+            
+
+    </script>
+    <script src="./damn.js"></script>
+    <script src="./machine.js"></script>
+</body>
+
+</html>
